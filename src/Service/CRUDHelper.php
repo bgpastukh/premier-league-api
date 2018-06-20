@@ -11,6 +11,7 @@ namespace App\Service;
 use App\Exception\EntityInvalidException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -118,7 +119,13 @@ class CRUDHelper
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
-            throw new EntityInvalidException((string)$errors);
+            $validationErrors = [];
+            /** @var ConstraintViolation $error */
+            foreach ($errors as $error) {
+                $validationErrors[] = $error->getMessage();
+            }
+
+            throw new EntityInvalidException(implode(', ', $validationErrors));
         }
     }
 

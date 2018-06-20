@@ -34,7 +34,8 @@ class League
     /**
      * @var string
      *
-     * @Assert\Length(min="3", max="20")
+     * @Assert\Length(min="3", max="20",
+     *     maxMessage="League's name should be longer then 3", minMessage="League's name should be shorter then 20")
      * @Assert\NotBlank(message="League's name shouldn't be empty")
      * @Groups({League::GROUP_SHOW_LEAGUE, Team::GROUP_SHOW_TEAM})
      * @ORM\Column(type="string")

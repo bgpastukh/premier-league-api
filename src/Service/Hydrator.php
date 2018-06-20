@@ -11,6 +11,10 @@ namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * Class Hydrator
+ * @package App\Service
+ */
 class Hydrator
 {
     private const TARGET_ENTITY_PATTERN = '/(targetEntity="(.*)")/';

@@ -10,6 +10,10 @@ namespace App\Exception;
 
 use Throwable;
 
+/**
+ * Class EntityInvalidException
+ * @package App\Exception
+ */
 class EntityInvalidException extends \Exception
 {
     public function __construct(string $message, int $code = 0, Throwable $previous = null)
