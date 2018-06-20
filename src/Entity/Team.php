@@ -9,6 +9,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -16,6 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Team
 {
+    public const GROUP_SHOW_TEAM = 'show_team';
+
     /**
      * @var int
      *
@@ -28,6 +32,9 @@ class Team
     /**
      * @var string
      *
+     * @Assert\Length(min="3", max="30")
+     * @Assert\NotBlank(message="Team's name shouldn't be empty")
+     * @Groups({League::GROUP_SHOW_LEAGUE, Team::GROUP_SHOW_TEAM})
      * @ORM\Column(type="string")
      */
     private $name;
@@ -35,6 +42,9 @@ class Team
     /**
      * @var string
      *
+     * @Assert\Length(min="3", max="20")
+     * @Assert\NotBlank(message="Team's strip shouldn't be empty")
+     * @Groups({League::GROUP_SHOW_LEAGUE, Team::GROUP_SHOW_TEAM})
      * @ORM\Column(type="string")
      */
     private $strip;
@@ -42,8 +52,10 @@ class Team
     /**
      * @var League
      *
+     * @Assert\NotBlank(message="Team's league should be selected")
+     * @Groups({"show_team"})
      * @ORM\ManyToOne(targetEntity="App\Entity\League")
-     * @ORM\JoinColumn(name="league_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="league_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $league;
 
@@ -56,31 +68,11 @@ class Team
     }
 
     /**
-     * @param int $id
-     * @return Team
-     */
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    /**
      * @return mixed
      */
     public function getName(): string
     {
         return $this->name;
-    }
-
-    /**
-     * @param string $name
-     * @return Team
-     */
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-        return $this;
     }
 
     /**
@@ -92,30 +84,10 @@ class Team
     }
 
     /**
-     * @param string $strip
-     * @return Team
-     */
-    public function setStrip(string $strip): self
-    {
-        $this->strip = $strip;
-        return $this;
-    }
-
-    /**
      * @return League
      */
     public function getLeague(): League
     {
         return $this->league;
-    }
-
-    /**
-     * @param League $league
-     * @return Team
-     */
-    public function setLeague(League $league): self
-    {
-        $this->league = $league;
-        return $this;
     }
 }

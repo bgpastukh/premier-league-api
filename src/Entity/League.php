@@ -10,13 +10,18 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Doctrine\ORM\EntityRepository")
  * @ORM\Table(name="league")
  */
 class League
 {
+    public const GROUP_SHOW_LEAGUE = 'show_league';
+
     /**
      * @var int
      *
@@ -29,13 +34,18 @@ class League
     /**
      * @var string
      *
+     * @Assert\Length(min="3", max="20")
+     * @Assert\NotBlank(message="League's name shouldn't be empty")
+     * @Groups({League::GROUP_SHOW_LEAGUE, Team::GROUP_SHOW_TEAM})
      * @ORM\Column(type="string")
      */
     private $name;
 
     /**
      * @var Team[]
-     * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="league")
+     *
+     * @Groups({League::GROUP_SHOW_LEAGUE})
+     * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="league", cascade={"remove"})
      */
     private $teams;
 
@@ -53,16 +63,6 @@ class League
     }
 
     /**
-     * @param int $id
-     * @return League
-     */
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getName(): string
@@ -71,19 +71,9 @@ class League
     }
 
     /**
-     * @param string $name
-     * @return League
+     * @return PersistentCollection|Team[]
      */
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @return Team[]
-     */
-    public function getTeams(): array
+    public function getTeams(): PersistentCollection
     {
         return $this->teams;
     }
