@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route(path="/team")
+ * @Route(path="/api/team")
  * Class TeamController
  * @package App\Controller
  */

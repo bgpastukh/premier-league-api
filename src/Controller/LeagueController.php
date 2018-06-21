@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route(path="/league")
+ * @Route(path="/api/league")
  *
  * Class LeagueController
  * @package App\Controller
