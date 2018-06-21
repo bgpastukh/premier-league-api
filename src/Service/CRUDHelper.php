@@ -105,6 +105,11 @@ class CRUDHelper
     public function delete(int $id, string $entityClass): void
     {
         $entity = $this->em->getRepository($entityClass)->find($id);
+
+        if (!$entity) {
+            return;
+        }
+
         $this->em->remove($entity);
 
         $this->save($entity);

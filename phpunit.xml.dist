@@ -21,6 +21,7 @@
         <env name="JWT_PRIVATE_KEY_PATH" value="config/jwt/private.pem"/>
         <env name="JWT_PUBLIC_KEY_PATH" value="config/jwt/public.pem"/>
         <env name="JWT_PASSPHRASE" value="66f283865c98d418d26deb94caca4644"/>
+        <env name="DATABASE_URL" value="mysql://db_user:db_password@127.0.0.1:3306/db_name" />
         <!-- ###- lexik/jwt-authentication-bundle ### -->
     </php>
 
