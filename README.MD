@@ -1,8 +1,9 @@
 ## Deployment:
     1. Clone this repository
-    2. Set env parameters from .env.dist
-    3. Create database (bin/console d:d:c)
-    4. Execute migrations (bin/console d:m:m)
+    2. composer install
+    3. Set env parameters from .env.dist
+    4. Create database (bin/console d:d:c)
+    5. Execute migrations (bin/console d:m:m)
 
 ## Tests:
     1. Set test database connection in phpunit.xml.dist
@@ -22,3 +23,5 @@
             'GET', '/api/league/show{id}' - show League
             'DELETE', '/api/league/delete/{id}' - delete League
         ]
+        
+# I added jwt keys in repository and hardcoded admin's creds for testing, of course we must not do that in real life.
