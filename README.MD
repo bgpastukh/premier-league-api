@@ -1,18 +1,18 @@
-Deployment:
+## Deployment:
     1. Clone this repository
     2. Set env parameters from .env.dist
     3. Create database (bin/console d:d:c)
     4. Execute migrations (bin/console d:m:m)
 
-Tests:
+## Tests:
     1. Set test database connection in phpunit.xml.dist
     2. Run bin/phpunit (or vendor/bin/simple-phpunit)
 
-Load fixtures
+## Load fixtures
     1. Run bin/console doctrine:fixtures:load -n
     You don't need to run it before tests, it's made automatically
     
-Use api:
+## Use api:
     1. Run server bin/console s:start
     2. Get JWT token. Query curl -X POST http://localhost:8000/api/login_check -d _username=admin -d _password=admin
     3. Available endpoints:
